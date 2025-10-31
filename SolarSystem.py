@@ -51,14 +51,15 @@ class SolarSystem:
 
 def create_gif(model: SolarSystem, steps_per_frame, frames, filename):
   
-  fig = plt.figure(figsize=(15,15))
+  fig = plt.figure(figsize=(15,15), facecolor='black')
   ax = fig.add_subplot(projection='3d')
-  scatter = ax.scatter3D([0], [0], [0], s=0.25)
+  scatter = ax.scatter3D([0], [0], [0], s=2)
 
-  ax.set_xlim(0.2e11, 0.6e11)
-  ax.set_ylim(1.2e11, 1.6e11)
-  ax.set_zlim(1e11, 2e11)
+  ax.set_xlim(-1.6e11, 1.6e11)
+  ax.set_ylim(-1.6e11, 1.6e11)
+  ax.set_zlim(-1.6e11, 1.6e11)
   ax.view_init(elev=90)
+  ax.set_facecolor('black')
 
   def init():
     scatter._offsets3d = ([0], [0], [0])
@@ -78,6 +79,6 @@ def create_gif(model: SolarSystem, steps_per_frame, frames, filename):
 sun = Star(Ms, np.array([0, 0, 0]))
 earth = Planet([sun], Me, np.array([0, Rs, 0]), np.array([Ve, 0, 0]), np.array([0, 0, 0]))
 moon = Planet([earth, sun], Mm, np.array([0, Rs + Re, 0]), np.array([Ve + Vm, 0, 0]), np.array([0, 0, 0]))
-system = SolarSystem(sun, [earth, moon], 100)
+system = SolarSystem(sun, [earth, moon], 1000)
 
-create_gif(system, 100, 300, 'test3')
+create_gif(system, 100, 300, 'test4')

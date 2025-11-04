@@ -9,7 +9,7 @@ Ms = 1.9891 * 10 ** 30
 Rs = 1.49597 * 10 ** 11
 Re = 3.844 * 10 ** 8
 Ve = 29782.7
-Vm = 1022
+Vm = 1022.0
 
 class Star:
     def __init__(self, mass, position: np.array):
@@ -53,11 +53,11 @@ def create_gif(model: SolarSystem, steps_per_frame, frames, filename):
   
   fig = plt.figure(figsize=(15,15), facecolor='black')
   ax = fig.add_subplot(projection='3d')
-  scatter = ax.scatter3D([0], [0], [0], s=2)
+  scatter = ax.scatter3D([0], [0], [0])
 
-  ax.set_xlim(-1.6e11, 1.6e11)
-  ax.set_ylim(-1.6e11, 1.6e11)
-  ax.set_zlim(-1.6e11, 1.6e11)
+  ax.set_xlim(-5.0e8, 5.0e8)
+  ax.set_ylim(-5.0e8, 5.0e8)
+  ax.set_zlim(-5.0e8, 5.0e8)
   ax.view_init(elev=90)
   ax.set_facecolor('black')
 
@@ -76,9 +76,8 @@ def create_gif(model: SolarSystem, steps_per_frame, frames, filename):
   anim = animation.FuncAnimation(fig, animate, init_func=init, frames=frames, interval=50, blit=True)
   anim.save(f'{filename}.gif', writer='pillow', fps=20)
 
-sun = Star(Ms, np.array([0, 0, 0]))
-earth = Planet([sun], Me, np.array([0, Rs, 0]), np.array([Ve, 0, 0]), np.array([0, 0, 0]))
-moon = Planet([earth, sun], Mm, np.array([0, Rs + Re, 0]), np.array([Ve + Vm, 0, 0]), np.array([0, 0, 0]))
-system = SolarSystem(sun, [earth, moon], 1000)
+earth = Star(Me, np.array([0, 0, 0]))
+moon = Planet([earth], Mm, np.array([Re, 0, 0]), np.array([0, Vm, 0]), np.array([0, 0, 0]))
+system = SolarSystem(earth, [moon], 1000)
 
 create_gif(system, 100, 300, 'test4')

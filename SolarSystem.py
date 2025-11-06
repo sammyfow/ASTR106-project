@@ -77,7 +77,7 @@ def create_gif(model: SolarSystem, steps_per_frame, frames, filename):
   anim.save(f'{filename}.gif', writer='pillow', fps=20)
 
 earth = Star(Me, np.array([0, 0, 0]))
-moon = Planet([earth], Mm, np.array([Re, 0, 0]), np.array([0, Vm, 0]), np.array([0, 0, 0]))
+moon = Planet([earth], Mm, np.array([0, Re, 0]), np.array([Vm, 0, 0]), np.array([0, 0, 0]))
 system = SolarSystem(earth, [moon], 1000)
 
-create_gif(system, 100, 300, 'test4')
+create_gif(system, 100, 300, 'test5')

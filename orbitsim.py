@@ -58,13 +58,14 @@ def create_gif(model: PlanetSystem, steps_per_frame, frames, filename):
   
   fig = plt.figure(figsize=(15,15), facecolor='black')
   ax = fig.add_subplot(projection='3d')
-  scatter = ax.scatter3D([0], [0], [0], sizes=[20, 10, 50])
+  scatter = ax.scatter3D([0], [0], [0], sizes=[30, 10, 500])
 
   ax.set_xlim(-2.0e9, 2.0e9)
   ax.set_ylim(-2.0e9, 2.0e9)
   ax.set_zlim(-2.0e9, 2.0e9)
   ax.view_init(elev=90)
   ax.set_facecolor('black')
+  ax.set_axis_off()
 
   def init():
     scatter._offsets3d = ([0], [0], [0])
@@ -84,7 +85,7 @@ def create_gif(model: PlanetSystem, steps_per_frame, frames, filename):
 
 sun = Planet(Ms, np.array([0, 0, 0]), np.array([0, 0, 0]), np.array([0, 0, 0]))
 earth = Planet(mass=Me, position=np.array([0, Rs, 0]), velocity=np.array([Ve, 0, 0]), acceleration=np.array([0, 0, 0]), parent=sun)
-moon = Planet(Mm, np.array([0, Re + Rs, 0]), np.array([Vm, 0, 0]), np.array([0, 0, 0]), earth)
+moon = Planet(Mm, np.array([0, Re + Rs, 0]), np.array([Vm*0.996, 0, Vm*0.0889]), np.array([0, 0, 0]), earth)
 system = PlanetSystem(np.array([0, 0, 0]), earth, moon, 500)
 
-create_gif(system, 100, 300, 'test14')
+create_gif(system, 100, 400, 'test19')

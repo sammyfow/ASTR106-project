@@ -2,14 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-G = 6.6743 * 10 ** -11
-Mm = 7.34767 * 10 ** 22
-Me = 5.97219 * 10 ** 24
-Ms = 1.9891 * 10 ** 24
-Rs = 1.49597 * 10 ** 9
-Re = 3.844 * 10 ** 8
-Ve = 29782.7 / 100
-Vm = 1022.0
+G = 6.6743 * 10 ** -11 #Gravitational Constant
+Mm = 7.34767 * 10 ** 22 #Mass of the moon(Kg)
+Me = 5.97219 * 10 ** 24 #Mass of the earth(Kg)
+Ms = 1.9891 * 10 ** 24 #Mass of the sun(Kg * 10E-6)
+Rs = 1.49597 * 10 ** 9 #Earths orbital radius (m * 10E-2)
+Re = 3.844 * 10 ** 8 # Moons orbital radius (m)
+Ve = 29782.7 / 100 #Earths orbital speed relative to sun (m/s * 10E-2)
+Vm = 1022.0 #Moons orbital speed relative to earth (m/s)
 
 class Star:
     def __init__(self, mass, position: np.array):
@@ -58,7 +58,7 @@ def create_gif(model: PlanetSystem, steps_per_frame, frames, filename):
   
   fig = plt.figure(figsize=(15,15), facecolor='black')
   ax = fig.add_subplot(projection='3d')
-  scatter = ax.scatter3D([0], [0], [0], sizes=[30, 10, 500])
+  scatter = ax.scatter3D([0], [0], [0], sizes=[30, 10, 500], depthshade=False)
 
   ax.set_xlim(-2.0e9, 2.0e9)
   ax.set_ylim(-2.0e9, 2.0e9)
@@ -83,9 +83,9 @@ def create_gif(model: PlanetSystem, steps_per_frame, frames, filename):
   anim = animation.FuncAnimation(fig, animate, init_func=init, frames=frames, interval=50, blit=True)
   anim.save(f'{filename}.gif', writer='pillow', fps=20)
 
-sun = Planet(Ms, np.array([0, 0, 0]), np.array([0, 0, 0]), np.array([0, 0, 0]))
-earth = Planet(mass=Me, position=np.array([0, Rs, 0]), velocity=np.array([Ve, 0, 0]), acceleration=np.array([0, 0, 0]), parent=sun)
-moon = Planet(Mm, np.array([0, Re + Rs, 0]), np.array([Vm*0.996, 0, Vm*0.0889]), np.array([0, 0, 0]), earth)
-system = PlanetSystem(np.array([0, 0, 0]), earth, moon, 500)
+#sun = Planet(Ms, np.array([0, 0, 0]), np.array([0, 0, 0]), np.array([0, 0, 0]))
+#earth = Planet(mass=Me, position=np.array([0, Rs, 0]), velocity=np.array([Ve, 0, 0]), acceleration=np.array([0, 0, 0]), parent=sun)
+#moon = Planet(Mm, np.array([0, Re + Rs, 0]), np.array([Vm*0.996, 0, Vm*0.0889]), np.array([0, 0, 0]), earth)
+#system = PlanetSystem(np.array([0, 0, 0]), earth, moon, 500)
 
-create_gif(system, 100, 400, 'test19')
+#create_gif(system, 100, 400, 'test19')
